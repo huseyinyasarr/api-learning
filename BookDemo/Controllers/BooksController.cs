@@ -63,8 +63,13 @@ public class BooksController : ControllerBase
         book.Id = entity.Id;
         ApplicationContext.Books.Add(book);
         return Ok(book);
+    }
 
-
+    [HttpDelete]
+    public IActionResult DeleteAllBooks()
+    {
+        ApplicationContext.Books.Clear();
+        return NoContent();
     }
 
 }
