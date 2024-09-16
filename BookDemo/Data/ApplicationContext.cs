@@ -1,6 +1,9 @@
-﻿namespace BookDemo.Data
+﻿namespace BookDemo.Data;
+
+public static class ApplicationContext
 {
-    public class ApplicationContext
+    static ApplicationContext()
     {
+
     }
 }
