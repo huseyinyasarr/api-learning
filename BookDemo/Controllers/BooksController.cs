@@ -80,7 +80,7 @@ public class BooksController : ControllerBase
             var entity = ApplicationContext.Books.Find(x => x.Id == id);
 
             if (entity is null)
-                return NotFound();
+                return NotFound(); //404
 
             ApplicationContext.Books.Remove(entity);
 
