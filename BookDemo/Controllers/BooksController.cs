@@ -72,4 +72,25 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
+    [HttpDelete("{id:int}")]
+    public IActionResult DeleteOneBook(int id)
+    {
+        try
+        {
+            var entity = ApplicationContext.Books.Find(x => x.Id == id);
+
+            if (entity is null)
+                return NotFound();
+
+            ApplicationContext.Books.Remove(entity);
+
+            return NoContent();
+        }
+        catch (Exception err)
+        {
+
+            return BadRequest(err.Message);
+        }
+    }
+
 }
