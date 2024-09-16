@@ -1,6 +1,7 @@
 ﻿using BookDemo.Data;
 using BookDemo.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookDemo.Controllers;
@@ -92,5 +93,19 @@ public class BooksController : ControllerBase
             return BadRequest(err.Message);
         }
     }
+
+    [HttpPatch("{id:int}")]
+    public IActionResult PartiallyUpdateOneBook([FromRoute(Name ="id")]int id, [FromBody] JsonPatchDocument<Book> book)
+    {
+        var entity = ApplicationContext.Books.Find(x => x.Id == id);
+
+        if( entity is null)
+            return NotFound();
+
+        book.ApplyTo(entity);
+        return NoContent();
+
+    }
+
 
 }
