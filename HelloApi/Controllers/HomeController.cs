@@ -9,7 +9,6 @@ namespace HelloApi.Controllers;
 public class HomeController : ControllerBase
 {
     [HttpGet]
-
     public ResponseModel GetHello()
     {
         return new ResponseModel()
