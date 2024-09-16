@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookDemo.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookDemo.Controllers;
@@ -7,4 +8,10 @@ namespace BookDemo.Controllers;
 [ApiController]
 public class BooksController : ControllerBase
 {
+    [HttpGet]
+    public IActionResult GetAllBooks()
+    {
+        var books = ApplicationContext.Books.ToList();
+        return Ok(books);
+    }
 }
