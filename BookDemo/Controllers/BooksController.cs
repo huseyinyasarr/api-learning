@@ -47,4 +47,24 @@ public class BooksController : ControllerBase
         }
     }
 
+    [HttpPut("{id:int}")]
+    public IActionResult UpdateBook(int id, Book book)
+    {
+
+        var entity = ApplicationContext.Books.Find(x => x.Id == id);
+
+        if(entity is null)
+            return NotFound();
+
+        if (id!=book.Id)
+            return BadRequest();
+
+        ApplicationContext.Books.Remove(entity);
+        book.Id = entity.Id;
+        ApplicationContext.Books.Add(book);
+        return Ok(book);
+
+
+    }
+
 }
